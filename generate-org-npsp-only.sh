@@ -27,11 +27,11 @@ cd
 cd Desktop
 cd 'Work 2'
 cd Redtag-Script
-sfdx force:org:create -s -f ./config/project-scratch-def.json -d $DURATION --setdefaultusername -a $ORG_ALIAS &&  \
+sfdx org create scratch -s -f ./config/project-scratch-def.json -d $DURATION --setdefaultusername -a $ORG_ALIAS &&  \
 echo "" && \
 
 echo "Installing NPSP" && \
-./build-scripts/install-npsp.sh $ORG_ALIAS && \
+./install-npsp.sh $ORG_ALIAS && \
 echo "" && \
 
 # Uncomment this if you have local source code that you want to push

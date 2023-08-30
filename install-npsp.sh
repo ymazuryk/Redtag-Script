@@ -76,35 +76,49 @@ find temp/cumulus/post/first -type f -exec sed -i '' -e "s/%%%NAMESPACE%%%/npsp_
 
 # Install dependencies
 echo "Installing dependency: Opportunity record types..." && \
-sfdx force:mdapi:deploy -d "temp/cumulus/pre/opportunity_record_types" -w 10 -u $ORG_ALIAS && \
+sfdx project deploy start -d "temp/cumulus/pre/opportunity_record_types" -w 10 -u $ORG_ALIAS && \
 echo "" && \
 
+
 echo "Installing Contacts & Organizations 3.7.05"
-sfdx force:package:install -p 04t80000001AWvwAAG -w 5 -u $ORG_ALIAS --noprompt && \
+sfdx package install -p 04t80000001AWvwAAG -w 5 -u $ORG_ALIAS --noprompt && \
 
 echo "Installing Household 3.9.0.8"
-sfdx force:package:install -p 04t80000000y8tyAAA -w 5 -u $ORG_ALIAS --noprompt && \
+sfdx package install -p 04t80000000y8tyAAA -w 5 -u $ORG_ALIAS --noprompt && \
 
 echo "Installing Affiliations 3.6.0.5"
-sfdx force:package:install -p 04t80000000lTMlAAM -w 5 -u $ORG_ALIAS --noprompt && \
+sfdx package install -p 04t80000000lTMlAAM -w 5 -u $ORG_ALIAS --noprompt && \
 
 echo "Installing dependency: Account record types..." && \
-sfdx force:mdapi:deploy -d "temp/cumulus/pre/account_record_types" -w 10 -u $ORG_ALIAS && \
+sfdx package install -d "temp/cumulus/pre/account_record_types" -w 10 -u $ORG_ALIAS && \
 
 echo "Installing Relationships 3.6.0.5"
-sfdx force:package:install -p 04t80000000y8kRAAQ -w 5 -u $ORG_ALIAS --noprompt && \
+sfdx package install -p 04t80000000y8kRAAQ -w 5 -u $ORG_ALIAS --noprompt && \
 
 echo "Installing Recurring Donations 3.10.0.4"
-sfdx force:package:install -p 04t80000000gZsgAAE -w 5 -u $ORG_ALIAS --noprompt && \
+sfdx package install -p 04t80000000gZsgAAE -w 5 -u $ORG_ALIAS --noprompt && \
 
 echo "Deploying Metadata"
+ls
+cd
+ls
+cd
+ls
+cd Desktop
+ls
+cd 'Work 2'
+ls
+cd Redtag-Script
+ls
+cd Redtag-Scriptl
+ls
 sfdx force:source:push 
 
 echo "Creating Data in Salesforce"
-sfdx force:data:tree:import -p ./data/import-Data-plan.json -u $ORG_ALIAS
+sfdx data import tree -p ./data/import-Data-plan.json -o $ORG_ALIAS
 
 echo "Open Org"
-sfdx force:org:open -u $ORG_ALIAS
+sfdx org open -o $ORG_ALIAS
 
 # Remove temp install dir
 rm -fr temp && \
