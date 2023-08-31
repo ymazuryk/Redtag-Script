@@ -1,7 +1,4 @@
 #!/bin/bash
-# Unofficial Salesforce DX install script for Salesforce.org NonProfit Success Pack (NPSP)
-# https://github.com/pozil/npsp-dx-template
-
 # Salesforce DX scratch org alias
 if [ "$#" -eq 1 ]; then
   ORG_ALIAS="$1"
@@ -99,19 +96,12 @@ echo "Installing Recurring Donations 3.10.0.4"
 sfdx package install -p 04t80000000gZsgAAE -w 5 -u $ORG_ALIAS --noprompt && \
 
 echo "Deploying Metadata"
-ls
 cd
-ls
 cd
-ls
 cd Desktop
-ls
 cd 'Work 2'
-ls
 cd Redtag-Script
-ls
 cd Redtag-Scriptl
-ls
 sfdx force:source:push 
 
 echo "Creating Data in Salesforce"
